@@ -52,4 +52,10 @@ public class CustomerService {
                 .filter(customer -> customer.getId().equals(id))
                 .findFirst().get();
     }
+    public void deleteCustomer(Integer id) {
+        customers.stream()
+                .filter(customer -> !customer.getDeleted())
+                .filter(customer -> customer.getId().equals(id))
+                .forEach(customer -> customer.setDeleted(true));
+    }
 }

@@ -42,11 +42,19 @@ public class ConsoleUI implements AutoCloseable{
                 case 5:
                     editCustomerById();
                     break;
+                case 6:
+                    deleteCustomerById();
+                    break;
                 default:
                     System.out.println("Invalid choice");
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void deleteCustomerById() {
+        Integer id = Integer.parseInt(getUserInput("Please enter the id of the customer"));
+        customerService.deleteCustomer(id);
     }
 
     private void editCustomerById() {
@@ -143,6 +151,7 @@ public class ConsoleUI implements AutoCloseable{
         System.out.println("3. Search customer by name");
         System.out.println("4. Search customer by family");
         System.out.println("5. Edit customer by id");
+        System.out.println("6. Delete customer by id");
         System.out.println("Please choose one of the  above options:");
     }
 
