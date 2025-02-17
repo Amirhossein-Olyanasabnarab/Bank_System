@@ -4,6 +4,7 @@ import dk.app.model.Customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CustomerService {
     private List<Customer> customers = new ArrayList<>();
@@ -21,5 +22,11 @@ public class CustomerService {
 
     public void addCustomer(Customer customer) {
         customers.add(customer);
+    }
+
+    public List<Customer> getCustomers() {
+        return customers.stream()
+                .filter(customer -> !customer.getDeleted())
+                .collect(Collectors.toList());
     }
 }

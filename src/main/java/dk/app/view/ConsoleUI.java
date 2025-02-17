@@ -5,6 +5,7 @@ import dk.app.model.LegalCustomer;
 import dk.app.model.RealCustomer;
 import dk.app.service.CustomerService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUI implements AutoCloseable{
@@ -30,13 +31,24 @@ public class ConsoleUI implements AutoCloseable{
                     addNewCustomer();
                     break;
                 case 2:
-                    System.out.println("Show all customers");
+                    printAllCustomers();
                     break;
                 default:
                     System.out.println("Invalid choice");
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void printAllCustomers() {
+        List<Customer> getAllCustomers = customerService.getCustomers();
+        if(getAllCustomers.isEmpty()){
+            System.out.println("No customers found");
+        }
+        System.out.println("All Customers => ");
+        for (Customer customer : getAllCustomers) {
+            System.out.println(customer);
+        }
     }
 
     private void addNewCustomer() {
