@@ -58,4 +58,10 @@ public class CustomerService {
                 .filter(customer -> customer.getId().equals(id))
                 .forEach(customer -> customer.setDeleted(true));
     }
+
+    public List<Customer> getAllDeletedCustomers(){
+        return customers.stream()
+                .filter(customer -> customer.getDeleted())
+                .collect(Collectors.toList());
+    }
 }
