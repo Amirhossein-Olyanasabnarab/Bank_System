@@ -29,4 +29,10 @@ public class CustomerService {
                 .filter(customer -> !customer.getDeleted())
                 .collect(Collectors.toList());
     }
+    public List<Customer> getCustomersByName(String name) {
+        return customers.stream()
+                .filter(customer -> !customer.getDeleted())
+                .filter(customer -> customer.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+    }
 }
