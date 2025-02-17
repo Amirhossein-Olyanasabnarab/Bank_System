@@ -36,11 +36,23 @@ public class ConsoleUI implements AutoCloseable{
                 case 3:
                     searchCustomerByName();
                     break;
+                case 4:
+                    searchCustomerByFamily();
+                    break;
                 default:
                     System.out.println("Invalid choice");
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void searchCustomerByFamily() {
+        String family = getUserInput("Enter family name");
+        List<Customer> customers = customerService.getCustomersByFamily(family);
+        if (customers.isEmpty()){
+            System.out.println("Customer not found");
+        }
+        customers.forEach(System.out::println);
     }
 
     private void searchCustomerByName() {
@@ -98,6 +110,7 @@ public class ConsoleUI implements AutoCloseable{
         System.out.println("1. Add new customers");
         System.out.println("2. Show all customers");
         System.out.println("3. Search customer by name");
+        System.out.println("4. Search customer by family");
         System.out.println("Please choose one of the  above options:");
     }
 

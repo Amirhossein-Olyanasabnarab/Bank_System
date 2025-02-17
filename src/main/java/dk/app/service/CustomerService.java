@@ -1,6 +1,7 @@
 package dk.app.service;
 
 import dk.app.model.Customer;
+import dk.app.model.RealCustomer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,15 @@ public class CustomerService {
         return customers.stream()
                 .filter(customer -> !customer.getDeleted())
                 .filter(customer -> customer.getName().equalsIgnoreCase(name))
+                .collect(Collectors.toList());
+    }
+
+    public List<Customer> getCustomersByFamily(String family) {
+        return customers.stream()
+                .filter(customer -> !customer.getDeleted())
+                .filter(customer -> customer instanceof RealCustomer)
+                .map(customer -> (RealCustomer) customer)
+                .filter(realCustomer -> realCustomer.getFamily().equalsIgnoreCase(family))
                 .collect(Collectors.toList());
     }
 }
