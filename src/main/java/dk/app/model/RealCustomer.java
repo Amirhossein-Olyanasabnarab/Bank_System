@@ -7,8 +7,8 @@ public class RealCustomer extends Customer {
     private String family;
     private String mobilePhoneNumber;
 
-    public RealCustomer(String name, String phoneNumber, CustomerType customerType) {
-        super(name, phoneNumber, customerType);
+    public RealCustomer(String name, String phoneNumber) {
+        super(name, phoneNumber, CustomerType.REAL_CUSTOMER);
     }
 
     public String getFamily() {

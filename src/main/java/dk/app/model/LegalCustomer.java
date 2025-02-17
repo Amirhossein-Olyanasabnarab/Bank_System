@@ -6,8 +6,8 @@ public class LegalCustomer extends Customer{
     private String companyName;
     private String fax;
 
-    public LegalCustomer(String name, String phoneNumber, CustomerType customerType) {
-        super(name, phoneNumber, customerType);
+    public LegalCustomer(String name, String phoneNumber) {
+        super(name, phoneNumber, CustomerType.LEGAL_CUSTOMER);
     }
 
     public String getCompanyName() {

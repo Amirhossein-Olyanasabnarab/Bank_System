@@ -19,4 +19,7 @@ public class CustomerService {
 
     private CustomerService() {}
 
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+    }
 }

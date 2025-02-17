@@ -1,11 +1,19 @@
 package dk.app.view;
 
+import dk.app.model.Customer;
+import dk.app.model.LegalCustomer;
+import dk.app.model.RealCustomer;
+import dk.app.service.CustomerService;
+
 import java.util.Scanner;
 
 public class ConsoleUI implements AutoCloseable{
     private final Scanner scanner;
+    private final CustomerService customerService;
+
     public ConsoleUI(){
         scanner = new Scanner(System.in);
+        customerService = CustomerService.getInstance();
     }
 
     public void startMenu(){
@@ -19,7 +27,7 @@ public class ConsoleUI implements AutoCloseable{
                     System.out.println("Exit");
                     break;
                 case 1:
-                    System.out.println("Add new customer");
+                    addNewCustomer();
                     break;
                 case 2:
                     System.out.println("Show all customers");
@@ -31,6 +39,35 @@ public class ConsoleUI implements AutoCloseable{
         }while (choice != 0);
     }
 
+    private void addNewCustomer() {
+        System.out.println("Please choose a customer type:");
+        System.out.println("1- Real Customer");
+        System.out.println("2- Legal Customer");
+        String choice = scanner.nextLine();
+
+        if (choice.equals("1")) {
+            String name = getUserInput("Please enter your name: ");
+            String family = getUserInput("Please enter your family: ");
+            String phone = getUserInput("Please enter your phone number: ");
+            String mobile = getUserInput("Please enter your mobile number: ");
+            RealCustomer realCustomer = new RealCustomer(name, phone);
+            realCustomer.setFamily(family);
+            realCustomer.setMobilePhoneNumber(mobile);
+            customerService.addCustomer(realCustomer);
+        } else if (choice.equals("2")) {
+            String name = getUserInput("Please enter your name: ");
+            String companyName = getUserInput("Please enter your company name: ");
+            String phone = getUserInput("Please enter your phone number: ");
+            String fax = getUserInput("Please enter your fax: ");
+            LegalCustomer legalCustomer = new LegalCustomer(name, phone);
+            legalCustomer.setCompanyName(companyName);
+            legalCustomer.setFax(fax);
+            customerService.addCustomer(legalCustomer);
+        }else {
+            System.out.println("Invalid choice");
+        }
+    }
+
     private void printMenu(){
         System.out.println("Please choose one of the following options:");
         System.out.println("0. Exit");
@@ -38,6 +75,12 @@ public class ConsoleUI implements AutoCloseable{
         System.out.println("2. Show all customers");
         System.out.println("Please choose one of the  above options:");
     }
+
+    private String getUserInput(String message){
+        System.out.println(message);
+        return scanner.nextLine();
+    }
+
     @Override
     public void close() {
         scanner.close();
