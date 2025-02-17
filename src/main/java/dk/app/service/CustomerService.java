@@ -45,4 +45,11 @@ public class CustomerService {
                 .filter(realCustomer -> realCustomer.getFamily().equalsIgnoreCase(family))
                 .collect(Collectors.toList());
     }
+
+    public Customer getCustomerById(Integer id) {
+        return customers.stream()
+                .filter(customer -> !customer.getDeleted())
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst().get();
+    }
 }

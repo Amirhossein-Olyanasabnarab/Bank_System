@@ -39,11 +39,42 @@ public class ConsoleUI implements AutoCloseable{
                 case 4:
                     searchCustomerByFamily();
                     break;
+                case 5:
+                    editCustomerById();
+                    break;
                 default:
                     System.out.println("Invalid choice");
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void editCustomerById() {
+        String id = getUserInput("Enter ID: ");
+        Customer customer = customerService.getCustomerById(Integer.parseInt(id));
+        if (customer == null) {
+            System.out.println("Customer not found");
+        }
+        System.out.println(customer);
+        if (customer instanceof RealCustomer realCustomer){
+            String newName = getUserInput("Enter new name: ");
+            realCustomer.setName(newName);
+            String newFamily = getUserInput("Enter new family: ");
+            realCustomer.setFamily(newFamily);
+            String newPhone = getUserInput("Enter new phone: ");
+            realCustomer.setMobilePhoneNumber(newPhone);
+            String newMobile = getUserInput("Enter new mobile: ");
+            realCustomer.setMobilePhoneNumber(newMobile);
+        }else if (customer instanceof LegalCustomer legalCustomer){
+            String newName = getUserInput("Enter new name: ");
+            legalCustomer.setName(newName);
+            String newCompany = getUserInput("Enter new company: ");
+            legalCustomer.setCompanyName(newCompany);
+            String newPhone = getUserInput("Enter new phone: ");
+            legalCustomer.setPhoneNumber(newPhone);
+            String newFax = getUserInput("Enter new fax: ");
+            legalCustomer.setFax(newFax);
+        }
     }
 
     private void searchCustomerByFamily() {
@@ -111,6 +142,7 @@ public class ConsoleUI implements AutoCloseable{
         System.out.println("2. Show all customers");
         System.out.println("3. Search customer by name");
         System.out.println("4. Search customer by family");
+        System.out.println("5. Edit customer by id");
         System.out.println("Please choose one of the  above options:");
     }
 
