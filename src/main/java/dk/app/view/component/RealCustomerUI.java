@@ -24,6 +24,14 @@ public class RealCustomerUI extends AbstractCustomerUI{
 
     @Override
     public void editCustomer(Customer customer) {
-
+        RealCustomer realCustomer = (RealCustomer) customer;
+        String newName = getUserInput("Please enter customer's name: ");
+        String newFamily = getUserInput("Please enter customer's family: ");
+        String newPhone = getUserInput("Please enter customer's phone: ");
+        String newMobile = getUserInput("Please enter customer's mobile: ");
+        realCustomer.setName(newName);
+        realCustomer.setFamily(newFamily);
+        realCustomer.setMobilePhoneNumber(newMobile);
+        realCustomer.setPhoneNumber(newPhone);
     }
 }
