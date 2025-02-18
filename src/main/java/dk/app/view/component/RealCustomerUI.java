@@ -19,6 +19,7 @@ public class RealCustomerUI extends AbstractCustomerUI{
         RealCustomer realCustomer = new RealCustomer(name, phone);
         realCustomer.setFamily(family);
         realCustomer.setMobilePhoneNumber(mobile);
+        return realCustomer;
     }
 
     @Override
