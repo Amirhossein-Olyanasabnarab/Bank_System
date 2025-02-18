@@ -4,6 +4,9 @@ import dk.app.model.Customer;
 import dk.app.model.LegalCustomer;
 import dk.app.model.RealCustomer;
 import dk.app.service.CustomerService;
+import dk.app.view.component.AbstractCustomerUI;
+import dk.app.view.component.LegalCustomerUI;
+import dk.app.view.component.RealCustomerUI;
 
 import java.util.List;
 import java.util.Scanner;
@@ -131,27 +134,15 @@ public class ConsoleUI implements AutoCloseable{
         System.out.println("2- Legal Customer");
         String choice = scanner.nextLine();
 
+        AbstractCustomerUI customerUI;
+
         if (choice.equals("1")) {
-            String name = getUserInput("Please enter your name: ");
-            String family = getUserInput("Please enter your family: ");
-            String phone = getUserInput("Please enter your phone number: ");
-            String mobile = getUserInput("Please enter your mobile number: ");
-            RealCustomer realCustomer = new RealCustomer(name, phone);
-            realCustomer.setFamily(family);
-            realCustomer.setMobilePhoneNumber(mobile);
-            customerService.addCustomer(realCustomer);
-        } else if (choice.equals("2")) {
-            String name = getUserInput("Please enter your name: ");
-            String companyName = getUserInput("Please enter your company name: ");
-            String phone = getUserInput("Please enter your phone number: ");
-            String fax = getUserInput("Please enter your fax: ");
-            LegalCustomer legalCustomer = new LegalCustomer(name, phone);
-            legalCustomer.setCompanyName(companyName);
-            legalCustomer.setFax(fax);
-            customerService.addCustomer(legalCustomer);
+            customerUI = new RealCustomerUI(scanner);
         }else {
-            System.out.println("Invalid choice");
+            customerUI = new LegalCustomerUI(scanner);
         }
+        Customer customer = customerUI.generateCustomer();
+        customerService.addCustomer(customer);
     }
 
     private void printMenu(){
