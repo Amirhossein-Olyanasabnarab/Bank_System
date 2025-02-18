@@ -24,6 +24,14 @@ public class LegalCustomerUI extends AbstractCustomerUI{
 
     @Override
     public void editCustomer(Customer customer) {
-
+        LegalCustomer legalCustomer = (LegalCustomer) customer;
+        String newName = getUserInput("Please enter customer's name: ");
+        String newCompanyName = getUserInput("Please enter customer's company name: ");
+        String newPhone = getUserInput("Please enter customer's phone: ");
+        String newFax = getUserInput("Please enter customer's fax: ");
+        legalCustomer.setName(newName);
+        legalCustomer.setCompanyName(newCompanyName);
+        legalCustomer.setPhoneNumber(newPhone);
+        legalCustomer.setFax(newFax);
     }
 }
