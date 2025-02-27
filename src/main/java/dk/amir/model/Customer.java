@@ -16,7 +16,7 @@ public abstract class Customer {
 
     /** Unique identifier for the customer. */
     private Integer id;
-    private String fullName;
+    private String name;
     private String phoneNumber;
     private String email;
     private final CustomerType type;
@@ -27,14 +27,14 @@ public abstract class Customer {
      * Constructs a new Customer with the given details.
      * The customer is assigned a unique ID automatically.
      *
-     * @param fullName The full name of the customer.
+     * @param name The full name of the customer.
      * @param phoneNumber The phone number of the customer.
      * @param email The email address of the customer.
      * @param type The type of the customer (REAL or LEGAL).
      */
-    public Customer(String fullName, String phoneNumber, String email, CustomerType type) {
+    public Customer(String name, String phoneNumber, String email, CustomerType type) {
         this.id = ID_GENERATOR.getAndIncrement();
-        this.fullName = capitalizeFirstLetter(fullName);
+        this.name = capitalizeFirstLetter(name);
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.type = type;
@@ -49,12 +49,12 @@ public abstract class Customer {
         return type;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = capitalizeFirstLetter(fullName);
+    public void setName(String name) {
+        this.name = capitalizeFirstLetter(name);
     }
 
     public String getPhoneNumber() {
@@ -86,7 +86,7 @@ public abstract class Customer {
     public String toString() {
         return
                 " id=" + id +
-                ", fullName='" + fullName + '\'' +
+                ", name='" + name + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", type=" + type ;
