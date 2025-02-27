@@ -82,6 +82,15 @@ public abstract class Customer {
     }
 
 
+    @Override
+    public String toString() {
+        return
+                " id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", type=" + type ;
+    }
 
     /**
      * Capitalizes the first letter of a given string.
