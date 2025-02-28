@@ -36,7 +36,7 @@ public class ConsoleUI implements AutoCloseable{
                     deleteCustomerById();
                     break;
                 case 4:
-                    System.out.println("edit customer by id");
+                    editCustomerById();
                     break;
                 case 5:
                     System.out.println("get customer by id");
@@ -58,6 +58,16 @@ public class ConsoleUI implements AutoCloseable{
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void editCustomerById() {
+        Integer customerId = scannerWrapper.getMessage("Enter customer id:", Integer::valueOf);
+        Customer customer = customerService.getCustomerById(customerId);
+        System.out.println(customer);
+
+        AbstractCustomerUI
+                .fromCustomerType(customer.getType())
+                .editCustomer(customer);
     }
 
     private void deleteCustomerById() {
