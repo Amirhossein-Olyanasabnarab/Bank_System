@@ -7,6 +7,8 @@ import dk.amir.service.impl.CustomerServiceImpl;
 import dk.amir.util.ScannerWrapper;
 import dk.amir.view.component.AbstractCustomerUI;
 
+import java.util.List;
+
 public class ConsoleUI implements AutoCloseable{
     private final ScannerWrapper scannerWrapper;
     private final CustomerService customerService;
@@ -28,10 +30,10 @@ public class ConsoleUI implements AutoCloseable{
                     addCustomer();
                     break;
                 case 2:
-                    System.out.println("show customers");
+                    showAllCustomers();
                     break;
                 case 3:
-                    System.out.println("delete customer");
+                    deleteCustomerById();
                     break;
                 case 4:
                     System.out.println("edit customer by id");
@@ -56,6 +58,19 @@ public class ConsoleUI implements AutoCloseable{
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void deleteCustomerById() {
+        Integer customerId = scannerWrapper.getMessage("Enter customer id:", Integer::valueOf);
+        customerService.deleteCustomer(customerId);
+    }
+
+    private void showAllCustomers() {
+        List<Customer> customers = customerService.getActiveCustomers();
+        if(customers.isEmpty()){
+            System.out.println("No active customers");
+        }
+        customers.forEach(System.out::println);
     }
 
     private void addCustomer() {
