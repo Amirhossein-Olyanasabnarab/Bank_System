@@ -19,6 +19,14 @@ public class LegalCustomerUI extends AbstractCustomerUI{
 
     @Override
     public void editCustomer(Customer customer) {
-
+        LegalCustomer legalCustomer = (LegalCustomer) customer;
+        String name = scannerWrapper.getMessage("Please enter new name:", Function.identity());
+        legalCustomer.setName(name);
+        String phone = scannerWrapper.getMessage("Please enter new phone:", Function.identity());
+        legalCustomer.setPhoneNumber(phone);
+        String email = scannerWrapper.getMessage("Please enter new email:", Function.identity());
+        legalCustomer.setEmail(email);
+        String industry = scannerWrapper.getMessage("Please enter industry:", Function.identity());
+        legalCustomer.setIndustry(industry);
     }
 }
