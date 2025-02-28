@@ -4,6 +4,11 @@ import dk.amir.model.Customer;
 
 import java.util.List;
 
+
+/**
+ * Interface defining the contract for customer-related operations.
+ * Provides methods for adding, retrieving, deleting, and searching customers.
+ */
 public interface CustomerService {
     void addCustomer(Customer customer);
     Customer getCustomerById(Integer id);
