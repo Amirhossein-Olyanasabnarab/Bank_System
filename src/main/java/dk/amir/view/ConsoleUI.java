@@ -22,7 +22,7 @@ public class ConsoleUI implements AutoCloseable{
                     System.out.println("Exit....!!!");
                     break;
                 case 1:
-                    System.out.println("add customer");
+                    addCustomer();
                     break;
                 case 2:
                     System.out.println("show customers");
@@ -53,6 +53,14 @@ public class ConsoleUI implements AutoCloseable{
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void addCustomer() {
+        System.out.println("Customer Type => ");
+        System.out.println("1. Real Customer");
+        System.out.println("2. Legal Customer");
+        int choice = scannerWrapper.getMessage("Please enter your customer type:", Integer::valueOf);
+
     }
 
     private void printMenu(){
