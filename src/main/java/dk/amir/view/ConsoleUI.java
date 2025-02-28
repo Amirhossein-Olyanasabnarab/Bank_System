@@ -8,6 +8,7 @@ import dk.amir.util.ScannerWrapper;
 import dk.amir.view.component.AbstractCustomerUI;
 
 import java.util.List;
+import java.util.function.Function;
 
 public class ConsoleUI implements AutoCloseable{
     private final ScannerWrapper scannerWrapper;
@@ -39,25 +40,61 @@ public class ConsoleUI implements AutoCloseable{
                     editCustomerById();
                     break;
                 case 5:
-                    System.out.println("get customer by id");
+                    getCustomerById();
                     break;
                 case 6:
-                    System.out.println("get customer by name");
+                    getCustomerByName();
                     break;
                 case 7:
-                    System.out.println("get customer by family");
+                    getCustomerByFamily();
                     break;
                 case 8:
-                    System.out.println("get add deleted customers");
+                    getAllDeletedCustomers();
                     break;
                 case 9:
-                    System.out.println("get all active and none-active customers");
+                    getAllCustomersAsActiveOrNonActive();
                     break;
                 default:
                     System.out.println("Invalid choice");
                     break;
             }
         }while (choice != 0);
+    }
+
+    private void getAllCustomersAsActiveOrNonActive() {
+        List<Customer> customers = customerService.getAllCustomers();
+        for (Customer customer : customers) {
+            System.out.println(customer);
+        }
+    }
+
+    private void getAllDeletedCustomers() {
+        List<Customer> customers = customerService.getDeletedCustomers();
+        if(customers.isEmpty()){
+            System.out.println("No active customers");
+        }else {
+            for (Customer customer : customers) {
+                System.out.println(customer);
+            }
+        }
+    }
+
+    private void getCustomerByFamily() {
+        String family = scannerWrapper.getMessage("Enter family name:", Function.identity());
+        List<Customer> customers = customerService.searchCustomerByFamily(family);
+        customers.forEach(System.out::println);
+    }
+
+    private void getCustomerByName() {
+        String name = scannerWrapper.getMessage("Enter your customer name:", Function.identity());
+        List<Customer> customers = customerService.searchCustomerByName(name);
+        customers.forEach(System.out::println);
+    }
+
+    private void getCustomerById() {
+        Integer customerId = scannerWrapper.getMessage("Enter customer id:", Integer::valueOf);
+        Customer customer = customerService.getCustomerById(customerId);
+        System.out.println(customer);
     }
 
     private void editCustomerById() {
