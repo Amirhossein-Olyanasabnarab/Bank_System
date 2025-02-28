@@ -1,8 +1,11 @@
 package dk.amir.view;
 
+import dk.amir.enums.CustomerType;
+import dk.amir.model.Customer;
 import dk.amir.service.CustomerService;
 import dk.amir.service.impl.CustomerServiceImpl;
 import dk.amir.util.ScannerWrapper;
+import dk.amir.view.component.AbstractCustomerUI;
 
 public class ConsoleUI implements AutoCloseable{
     private final ScannerWrapper scannerWrapper;
@@ -61,6 +64,11 @@ public class ConsoleUI implements AutoCloseable{
         System.out.println("2. Legal Customer");
         int choice = scannerWrapper.getMessage("Please enter your customer type:", Integer::valueOf);
 
+        Customer customer = AbstractCustomerUI
+                .fromCustomerType(CustomerType.fromValue(choice))
+                .generateCustomer();
+
+        customerService.addCustomer(customer);
     }
 
     private void printMenu(){
