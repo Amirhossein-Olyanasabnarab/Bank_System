@@ -1,6 +1,7 @@
 package dk.amir.util;
 
 import java.util.Scanner;
+import java.util.function.Function;
 
 
 /**
@@ -35,6 +36,19 @@ public class ScannerWrapper implements AutoCloseable{
         INSTANCE = new ScannerWrapper();
     }
 
+
+    /**
+     * Reads user input from the console after displaying a message and converts it using the provided function.
+     *
+     * @param message   the message to display before reading input.
+     * @param converter a function to convert the input string into the desired type.
+     * @param <T>       the type of the converted input.
+     * @return the converted input.
+     */
+    public <T> T getMessage(String message, Function<String, T> converter){
+        System.out.println(message);
+        return converter.apply(scanner.nextLine());
+    }
 
     /**
      * Closes the scanner resource when no longer needed.
