@@ -1,6 +1,9 @@
 package dk.amir.view.component;
 
 import dk.amir.model.Customer;
+import dk.amir.model.LegalCustomer;
+
+import java.util.function.Function;
 
 public class LegalCustomerUI extends AbstractCustomerUI{
     public LegalCustomerUI(){
@@ -8,7 +11,10 @@ public class LegalCustomerUI extends AbstractCustomerUI{
     }
     @Override
     protected Customer additionalGenerateCustomer(String name, String phone, String email) {
-        return null;
+        String industry = scannerWrapper.getMessage("Please enter industry:", Function.identity());
+        LegalCustomer legalCustomer = new LegalCustomer(name, phone, email);
+        legalCustomer.setIndustry(industry);
+        return legalCustomer;
     }
 
     @Override
