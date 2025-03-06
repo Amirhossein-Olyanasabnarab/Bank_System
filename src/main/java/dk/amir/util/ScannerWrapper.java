@@ -47,7 +47,12 @@ public class ScannerWrapper implements AutoCloseable{
      */
     public <T> T getMessage(String message, Function<String, T> converter){
         System.out.println(message);
-        return converter.apply(scanner.nextLine());
+        try {
+            return converter.apply(scanner.nextLine());
+        }catch (Exception ex){
+            System.out.println("Wrong Input !!!");
+            return getMessage(message, converter);
+        }
     }
 
     /**
