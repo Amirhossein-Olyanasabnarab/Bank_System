@@ -4,7 +4,7 @@ package org.app;
  * Hello world!
  *
  */
-public class App 
+public class AppRunner
 {
     public static void main( String[] args )
     {
